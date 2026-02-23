@@ -119,3 +119,8 @@
 - [x] Convert hero image to WebP
 - [x] Upload both to CDN
 - [x] Update all image references to WebP URLs
+
+## Phase 17: Contact Page
+- [x] Build Contact Us page with support email and details
+- [x] Add /contact route in App.tsx
+- [x] Add Contact link in Footer
