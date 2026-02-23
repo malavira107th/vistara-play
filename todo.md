@@ -124,3 +124,9 @@
 - [x] Build Contact Us page with support email and details
 - [x] Add /contact route in App.tsx
 - [x] Add Contact link in Footer
+
+## Phase 18: Legal & About Pages
+- [x] Build Terms of Service page (/terms)
+- [x] Build Privacy Policy page (/privacy)
+- [x] Build About Us page (/about)
+- [x] Verify routes and footer links
