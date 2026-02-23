@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Mail, Shield } from "lucide-react";
+import { Mail } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -45,12 +45,7 @@ export default function Footer() {
               <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
               <li><Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li>
               <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
-              <li>
-                <Link href="/responsible-play" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5">
-                  <Shield className="h-3.5 w-3.5 text-primary" />
-                  Responsible Play
-                </Link>
-              </li>
+              <li><Link href="/responsible-play" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Responsible Play</Link></li>
             </ul>
           </div>
 
