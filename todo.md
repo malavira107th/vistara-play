@@ -78,3 +78,32 @@
 - [x] Write vitest tests (10 tests, all passing)
 - [x] Vercel-compatible config (no local FS, serverless-safe DB)
 - [x] Final checkpoint
+
+## Phase 13: Logo, Favicon & 18+ Compliance
+- [ ] Generate Vistara Play logo (SVG/PNG, deep green + gold)
+- [ ] Generate favicon (32x32 and 16x16 ICO/PNG)
+- [ ] Integrate logo into Navbar (replace text VP badge)
+- [ ] Add favicon to index.html
+- [ ] Create 18+ age gate modal (shown on first visit, stored in localStorage)
+- [ ] Add 18+ badge/notice in Navbar
+- [ ] Add 18+ disclaimer in Footer
+- [ ] Add 18+ notice on Homepage hero section
+- [ ] Update app title and meta description with 18+ notice
+
+## Phase 13: Logo, Favicon, 18+ & Responsible Play
+- [x] Generate Vistara Play logo PNG
+- [x] Generate favicon PNG
+- [x] Integrate logo into Navbar (replace VP text badge)
+- [x] Add favicon to index.html
+- [x] Add 18+ badge in Navbar
+- [x] Add 18+ notice on Homepage hero
+- [x] Build Responsible Play page (entertainment only, responsible use guidelines)
+- [x] Update Footer with Responsible Play link and 18+ disclaimer
+- [x] Add route for /responsible-play in App.tsx
+
+## Phase 14: Logo Redesign & Hero Image
+- [x] Regenerate improved Vistara Play logo
+- [x] Generate hero section background image
+- [x] Upload both to CDN
+- [x] Replace logo in Navbar and Footer
+- [x] Add hero image to homepage hero section

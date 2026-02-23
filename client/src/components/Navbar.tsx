@@ -48,13 +48,17 @@ export default function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <span className="text-primary-foreground font-bold text-sm">VP</span>
-          </div>
-          <div className="hidden sm:block">
-            <span className="font-display text-lg font-bold text-foreground leading-none">Vistara</span>
-            <span className="font-display text-lg font-bold text-accent leading-none"> Play</span>
-          </div>
+          <img
+            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/AJckJnkidhWxgLOp.png"
+            alt="Vistara Play"
+            className="h-9 w-auto object-contain"
+          />
+          <Badge
+            variant="outline"
+            className="hidden sm:inline-flex text-[10px] font-bold border-amber-500 text-amber-600 bg-amber-50 px-1.5 py-0 h-5 shrink-0"
+          >
+            18+
+          </Badge>
         </Link>
 
         {/* Desktop Nav */}
@@ -87,7 +91,7 @@ export default function Navbar() {
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-2 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
                     <Avatar className="h-8 w-8 border-2 border-border">
-                      <AvatarImage src={user?.avatarUrl ?? undefined} />
+                      <AvatarImage src={(user as any)?.avatarUrl ?? undefined} />
                       <AvatarFallback className="bg-primary text-primary-foreground text-xs font-semibold">
                         {initials}
                       </AvatarFallback>
@@ -163,7 +167,11 @@ export default function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 bg-card">
-              <div className="flex flex-col gap-1 mt-6">
+              <div className="flex items-center gap-2 mb-6 pt-2">
+                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/AJckJnkidhWxgLOp.png" alt="Vistara Play" className="h-8 w-auto object-contain" />
+                <Badge variant="outline" className="text-[10px] font-bold border-amber-500 text-amber-600 bg-amber-50 px-1.5 py-0 h-5">18+</Badge>
+              </div>
+              <div className="flex flex-col gap-1">
                 {navLinks.map((link) => (
                   <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
                     <Button

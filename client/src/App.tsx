@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 
 // Public pages
 import Home from "./pages/Home";
+import ResponsiblePlay from "./pages/ResponsiblePlay";
 import HowToPlay from "./pages/HowToPlay";
 import About from "./pages/About";
 import Terms from "./pages/Terms";
@@ -51,6 +52,7 @@ function Router() {
       <Route path="/privacy" component={Privacy} />
       <Route path="/contact" component={Contact} />
       <Route path="/leaderboard" component={Leaderboard} />
+      <Route path="/responsible-play" component={ResponsiblePlay} />
 
       {/* Auth & Profile */}
       <Route path="/profile" component={Profile} />

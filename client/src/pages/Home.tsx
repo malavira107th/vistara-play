@@ -120,15 +120,18 @@ export default function Home() {
       <Navbar />
 
       {/* ── Hero ─────────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[oklch(0.20_0.07_145)] via-[oklch(0.27_0.10_145)] to-[oklch(0.34_0.13_145)]">
-        {/* Subtle pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, oklch(1 0 0) 1px, transparent 0)`,
-            backgroundSize: "32px 32px",
-          }}
-        />
+      <section
+        className="relative overflow-hidden"
+        style={{
+          backgroundImage: `url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/LtUsrjkaXCFnqwRQ.jpg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      >
+        {/* Dark overlay for text legibility */}
+        <div className="absolute inset-0 bg-[oklch(0.10_0.05_145/0.82)]" />
+        {/* Subtle green tint gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.12_0.06_145/0.5)] via-transparent to-[oklch(0.08_0.04_145/0.7)]" />
         <div className="container relative py-20 md:py-28 lg:py-32">
           <div className="max-w-3xl mx-auto text-center">
             <Badge
@@ -176,6 +179,10 @@ export default function Home() {
             <p className="mt-5 text-sm text-[oklch(0.65_0.04_145)]">
               No purchase required. Free to create an account and play.
             </p>
+            <div className="mt-4 inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5">
+              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-400 text-[oklch(0.15_0.02_145)] font-bold text-[10px] shrink-0">18+</span>
+              <span className="text-xs text-[oklch(0.75_0.04_145)]">For entertainment purposes only. Users aged 18 and above.</span>
+            </div>
           </div>
         </div>
       </section>
