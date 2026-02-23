@@ -123,7 +123,7 @@ export default function Home() {
       <section
         className="relative overflow-hidden"
         style={{
-          backgroundImage: `url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/LtUsrjkaXCFnqwRQ.jpg')`,
+          backgroundImage: `url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/hcNpQnRylOJfSwFX.webp')`,
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}

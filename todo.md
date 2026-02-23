@@ -107,3 +107,15 @@
 - [x] Upload both to CDN
 - [x] Replace logo in Navbar and Footer
 - [x] Add hero image to homepage hero section
+
+## Phase 15: Modern Logo Redesign
+- [ ] Create modern SVG logo matching website theme (green + gold)
+- [ ] Render SVG to PNG and upload to CDN
+- [ ] Replace logo in Navbar and Footer
+
+## Phase 16: WebP Images & Logo Finalization
+- [x] Crop logo tightly (remove excess whitespace)
+- [x] Convert logo to WebP
+- [x] Convert hero image to WebP
+- [x] Upload both to CDN
+- [x] Update all image references to WebP URLs
