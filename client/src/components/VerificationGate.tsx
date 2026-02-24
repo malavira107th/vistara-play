@@ -1,11 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle2, AlertTriangle } from "@/components/SvgIcon";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "6Ldys3UsAAAAAIvO7p8XKO6_eUqOJ9dJVCtTQQYi";
 type Step = "captcha" | "age" | "done";
-
-
 
 // Extend window to include grecaptcha
 declare global {
@@ -24,41 +22,52 @@ interface VerificationGateProps {
 }
 
 export default function VerificationGate({ children }: VerificationGateProps) {
-  // Always show gate on every homepage visit/refresh
   const [step, setStep] = useState<Step>("captcha");
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [ageError, setAgeError] = useState(false);
   const [captchaError, setCaptchaError] = useState(false);
   const [captchaReady, setCaptchaReady] = useState(false);
+  // Track whether the user has triggered reCAPTCHA load
+  const [recaptchaRequested, setRecaptchaRequested] = useState(false);
+  const [recaptchaLoading, setRecaptchaLoading] = useState(false);
+  const widgetRendered = useRef(false);
 
-  // Load reCAPTCHA script from Google CDN
-  useEffect(() => {
-    if (step !== "captcha") return;
+  // Load reCAPTCHA script ONLY when user clicks "Load Verification"
+  // This defers ~1,068 KiB of Google CDN JS from the initial page load
+  const loadRecaptcha = useCallback(() => {
+    if (recaptchaRequested) return;
+    setRecaptchaRequested(true);
+    setRecaptchaLoading(true);
 
-    // Callback when reCAPTCHA script loads
     window.onRecaptchaLoad = () => {
       setCaptchaReady(true);
+      setRecaptchaLoading(false);
     };
 
-    // Inject script if not already present
-    if (!document.getElementById("recaptcha-script")) {
-      const script = document.createElement("script");
-      script.id = "recaptcha-script";
-      script.src = "https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit";
-      script.async = true;
-      script.defer = true;
-      document.head.appendChild(script);
-    } else if (window.grecaptcha) {
-      setCaptchaReady(true);
+    if (document.getElementById("recaptcha-script")) {
+      // Script already present (e.g. back navigation)
+      if (window.grecaptcha) {
+        setCaptchaReady(true);
+        setRecaptchaLoading(false);
+      }
+      return;
     }
-  }, [step]);
+
+    const script = document.createElement("script");
+    script.id = "recaptcha-script";
+    script.src = `https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }, [recaptchaRequested]);
 
   // Render reCAPTCHA widget once script is ready
   useEffect(() => {
-    if (!captchaReady || step !== "captcha") return;
+    if (!captchaReady || step !== "captcha" || widgetRendered.current) return;
     const container = document.getElementById("recaptcha-container");
     if (!container || container.childElementCount > 0) return;
 
+    widgetRendered.current = true;
     window.grecaptcha.render(container, {
       sitekey: RECAPTCHA_SITE_KEY,
       theme: "dark",
@@ -83,13 +92,18 @@ export default function VerificationGate({ children }: VerificationGateProps) {
   }, [step]);
 
   const handleCaptchaSubmit = useCallback(() => {
+    // If reCAPTCHA hasn't been loaded yet, load it first
+    if (!recaptchaRequested) {
+      loadRecaptcha();
+      return;
+    }
     const token = captchaToken || (window.grecaptcha ? window.grecaptcha.getResponse() : null);
     if (!token) {
       setCaptchaError(true);
       return;
     }
     setStep("age");
-  }, [captchaToken]);
+  }, [captchaToken, recaptchaRequested, loadRecaptcha]);
 
   const handleAgeConfirm = () => {
     sessionStorage.setItem("vp_verified", "true");
@@ -152,12 +166,18 @@ export default function VerificationGate({ children }: VerificationGateProps) {
                   </p>
                 </div>
 
-                <div className="flex justify-center min-h-[78px] items-center">
-                  {!captchaReady && (
-                    <div className="text-gray-500 text-sm">Loading verification...</div>
-                  )}
-                  <div id="recaptcha-container" />
-                </div>
+                {/* reCAPTCHA widget area — only shown after user triggers load */}
+                {recaptchaRequested && (
+                  <div className="flex justify-center min-h-[78px] items-center">
+                    {recaptchaLoading && (
+                      <div className="flex flex-col items-center gap-2 text-gray-500 text-sm">
+                        <div className="w-6 h-6 border-2 border-[#c9a84c] border-t-transparent rounded-full animate-spin" />
+                        Loading verification...
+                      </div>
+                    )}
+                    <div id="recaptcha-container" />
+                  </div>
+                )}
 
                 {captchaError && (
                   <div className="flex items-center gap-2 text-red-400 text-sm bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3">
@@ -168,9 +188,19 @@ export default function VerificationGate({ children }: VerificationGateProps) {
 
                 <Button
                   onClick={handleCaptchaSubmit}
-                  className="w-full bg-[#c9a84c] hover:bg-[#b8963e] text-black font-bold h-12 text-base"
+                  disabled={recaptchaLoading}
+                  className="w-full bg-[#c9a84c] hover:bg-[#b8963e] text-black font-bold h-12 text-base disabled:opacity-70"
                 >
-                  Continue →
+                  {recaptchaLoading ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                      Loading...
+                    </span>
+                  ) : recaptchaRequested && captchaReady ? (
+                    "Continue →"
+                  ) : (
+                    "Start Verification →"
+                  )}
                 </Button>
               </div>
             )}

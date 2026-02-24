@@ -172,3 +172,8 @@
 - [x] Add code splitting / lazy loading for routes in App.tsx
 - [x] Fonts are self-hosted with font-display:swap - no Google CDN dependency
 - [x] hero-bg.webp already optimized (134 KiB at 1280px)
+## Phase 25: Defer reCAPTCHA to Eliminate 568 KiB Unused JS
+- [x] Load reCAPTCHA script only after user clicks "Start Verification" button (not on mount)
+- [x] Remove eager script injection from useEffect on component mount
+- [x] Show loading spinner while reCAPTCHA loads after deferred load
+- [x] Ensure reCAPTCHA renders correctly after deferred load
