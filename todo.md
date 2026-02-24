@@ -149,3 +149,10 @@
 - [x] Audit all hardcoded URLs and third-party references
 - [x] Fix/replace all found issues
 - [x] Push clean code to GitHub
+
+## Phase 22: Complete Icon Self-Hosting (shadcn/ui components)
+- [x] Extract all missing icons used in shadcn/ui components
+- [x] Add missing icons to SvgIcon component
+- [x] Replace all lucide-react imports in ui/ files
+- [x] Verify 0 lucide-react imports remain
+- [x] Push to GitHub

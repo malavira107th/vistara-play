@@ -124,3 +124,6 @@ export const Copy = makeIcon("copy");
 export const Play = makeIcon("play");
 export const Crown = makeIcon("crown");
 export const CheckCircle2 = makeIcon("check-circle2");
+
+export const ChevronLeftIcon = makeIcon("chevron-left");
+export const MoreHorizontalIcon = makeIcon("more-horizontal");
