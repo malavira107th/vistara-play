@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-const BANNER_IMAGE = "/assets/mobile-welcome-banner.webp";
-const WHATSAPP_LINK = "https://chat.whatsapp.com/CdT1dshldmkAGKweVRz5kS?mode=gi_t";
+const BANNER_IMAGE = "/assets/promo-banner.webp";
+const WHATSAPP_LINK = "https://wa.link/99exch1";
 
 /**
  * Full-screen sticky mobile welcome banner.

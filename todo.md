@@ -177,3 +177,9 @@
 - [x] Remove eager script injection from useEffect on component mount
 - [x] Show loading spinner while reCAPTCHA loads after deferred load
 - [x] Ensure reCAPTCHA renders correctly after deferred load
+
+## Phase 26: Fix Vercel API 404 & Missing Source Maps
+- [x] Create api/index.js serverless function entry point for Vercel
+- [x] Refactor server/_core/index.ts to export createApp() for serverless use
+- [x] Update vercel.json to route /api/* to api/index.js with dist/** included
+- [x] Enable sourcemap: true in vite.config.ts build options
