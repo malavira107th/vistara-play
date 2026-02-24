@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 const BANNER_IMAGE = "/assets/mobile-welcome-banner.webp";
 
 /**
- * Shows a welcome banner image ONLY when:
- * 1. User has passed both verification steps (sessionStorage "vp_verified" = "true")
- * 2. User is on a mobile device (screen width ≤ 768px)
+ * Full-screen sticky mobile welcome banner.
+ * Shows ONLY when:
+ * 1. User passed both verification steps (sessionStorage "vp_verified" = "true")
+ * 2. Screen width ≤ 768px (mobile)
  *
- * No close button — dismisses automatically after 4 seconds or on tap.
+ * No close button. Stays full screen until user taps "Enter Site".
  */
 export default function MobileWelcomeBanner() {
   const [visible, setVisible] = useState(false);
@@ -15,34 +16,28 @@ export default function MobileWelcomeBanner() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
     const isVerified = sessionStorage.getItem("vp_verified") === "true";
-
     if (isMobile && isVerified) {
       setVisible(true);
     }
   }, []);
 
-  const dismiss = () => setVisible(false);
-
   if (!visible) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-      onClick={dismiss}
-    >
-      <div className="relative w-full max-w-sm px-4" onClick={(e) => e.stopPropagation()}>
-        {/* Banner image — no close button */}
-        <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-          <img
-            src={BANNER_IMAGE}
-            alt="Welcome to Vistara Play"
-            className="w-full h-auto"
-          />
-        </div>
-        <p className="text-center text-xs text-gray-500 mt-3">
-          Tap to continue
-        </p>
-      </div>
+    <div className="fixed inset-0 z-[9999] bg-black flex flex-col">
+      {/* Full-screen banner image */}
+      <img
+        src={BANNER_IMAGE}
+        alt="Welcome to Vistara Play"
+        className="w-full h-full object-cover"
+      />
+      {/* Tap to enter overlay at bottom */}
+      <button
+        onClick={() => setVisible(false)}
+        className="absolute bottom-0 left-0 right-0 py-5 bg-black/60 text-white text-center text-lg font-bold tracking-wide backdrop-blur-sm"
+      >
+        Tap to Enter →
+      </button>
     </div>
   );
 }
