@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const BANNER_IMAGE = "/assets/mobile-welcome-banner.png";
+const BANNER_IMAGE = "/assets/mobile-welcome-banner.webp";
 
 /**
  * Shows a welcome banner image ONLY when:
