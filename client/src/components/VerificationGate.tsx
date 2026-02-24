@@ -5,6 +5,16 @@ import { Shield, CheckCircle2, AlertTriangle } from "lucide-react";
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "6Ldys3UsAAAAAIvO7p8XKO6_eUqOJ9dJVCtTQQYi";
 type Step = "captcha" | "age" | "done";
 
+const SESSION_KEY = "vp_gate_passed";
+
+function hasPassedGate(): boolean {
+  try { return sessionStorage.getItem(SESSION_KEY) === "1"; } catch { return false; }
+}
+
+function markGatePassed() {
+  try { sessionStorage.setItem(SESSION_KEY, "1"); } catch {}
+}
+
 // Extend window to include grecaptcha
 declare global {
   interface Window {
@@ -22,7 +32,8 @@ interface VerificationGateProps {
 }
 
 export default function VerificationGate({ children }: VerificationGateProps) {
-  const [step, setStep] = useState<Step>("captcha");
+  // Show gate only once per browser session — not on every page navigation
+  const [step, setStep] = useState<Step>(() => hasPassedGate() ? "done" : "captcha");
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [ageError, setAgeError] = useState(false);
   const [captchaError, setCaptchaError] = useState(false);
@@ -89,6 +100,7 @@ export default function VerificationGate({ children }: VerificationGateProps) {
   }, [captchaToken]);
 
   const handleAgeConfirm = () => {
+    markGatePassed();
     setStep("done");
   };
 
