@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const BANNER_IMAGE = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/oAKcaoowGcLDXPcP.png";
+const BANNER_IMAGE = "/assets/mobile-welcome-banner.png";
 
 /**
  * Shows a welcome banner image ONLY when:
