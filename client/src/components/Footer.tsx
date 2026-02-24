@@ -51,16 +51,27 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="text-sm font-semibold text-foreground mb-3">Support</h4>
-            <a
-              href="mailto:Support@vistaraplay.com"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Mail className="h-4 w-4 shrink-0" />
-              Support@vistaraplay.com
-            </a>
-            <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
-              This platform is free to use. No purchase required. No real money involved.
+            <h4 className="text-sm font-semibold text-foreground mb-3">Contact Us</h4>
+            <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-3">
+              <a
+                href="mailto:Support@vistaraplay.com"
+                className="flex items-center gap-2 text-sm text-foreground font-medium hover:text-primary transition-colors"
+              >
+                <Mail className="h-4 w-4 shrink-0 text-primary" />
+                Support@vistaraplay.com
+              </a>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                For any queries, support requests, or feedback, email us directly. We respond within 24–48 hours.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+              >
+                Visit Contact Page →
+              </Link>
+            </div>
+            <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+              Free to use. No purchase required. No real money involved.
             </p>
           </div>
         </div>

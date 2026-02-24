@@ -1,15 +1,20 @@
-import { useState, useRef, useEffect } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle2, AlertTriangle } from "lucide-react";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "6Ldys3UsAAAAAIvO7p8XKO6_eUqOJ9dJVCtTQQYi";
 type Step = "captcha" | "age" | "done";
 
-function setStoredVerification() {
-  try {
-    sessionStorage.setItem("vp_verified", "true");
-  } catch {}
+// Extend window to include grecaptcha
+declare global {
+  interface Window {
+    grecaptcha: {
+      render: (container: string | HTMLElement, params: object) => number;
+      getResponse: (widgetId?: number) => string;
+      reset: (widgetId?: number) => void;
+    };
+    onRecaptchaLoad: () => void;
+  }
 }
 
 interface VerificationGateProps {
@@ -17,14 +22,54 @@ interface VerificationGateProps {
 }
 
 export default function VerificationGate({ children }: VerificationGateProps) {
-  // Always start at captcha — gate shows on every page load/refresh
   const [step, setStep] = useState<Step>("captcha");
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [ageError, setAgeError] = useState(false);
   const [captchaError, setCaptchaError] = useState(false);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [captchaReady, setCaptchaReady] = useState(false);
 
-  // Prevent scroll on body when gate is visible
+  // Load reCAPTCHA script from Google CDN
+  useEffect(() => {
+    if (step !== "captcha") return;
+
+    // Callback when reCAPTCHA script loads
+    window.onRecaptchaLoad = () => {
+      setCaptchaReady(true);
+    };
+
+    // Inject script if not already present
+    if (!document.getElementById("recaptcha-script")) {
+      const script = document.createElement("script");
+      script.id = "recaptcha-script";
+      script.src = "https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit";
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    } else if (window.grecaptcha) {
+      setCaptchaReady(true);
+    }
+  }, [step]);
+
+  // Render reCAPTCHA widget once script is ready
+  useEffect(() => {
+    if (!captchaReady || step !== "captcha") return;
+    const container = document.getElementById("recaptcha-container");
+    if (!container || container.childElementCount > 0) return;
+
+    window.grecaptcha.render(container, {
+      sitekey: RECAPTCHA_SITE_KEY,
+      theme: "dark",
+      callback: (token: string) => {
+        setCaptchaToken(token);
+        setCaptchaError(false);
+      },
+      "expired-callback": () => {
+        setCaptchaToken(null);
+      },
+    });
+  }, [captchaReady, step]);
+
+  // Prevent body scroll when gate is visible
   useEffect(() => {
     if (step !== "done") {
       document.body.style.overflow = "hidden";
@@ -34,21 +79,16 @@ export default function VerificationGate({ children }: VerificationGateProps) {
     return () => { document.body.style.overflow = ""; };
   }, [step]);
 
-  const handleCaptchaChange = (token: string | null) => {
-    setCaptchaToken(token);
-    setCaptchaError(false);
-  };
-
-  const handleCaptchaSubmit = () => {
-    if (!captchaToken) {
+  const handleCaptchaSubmit = useCallback(() => {
+    const token = captchaToken || (window.grecaptcha ? window.grecaptcha.getResponse() : null);
+    if (!token) {
       setCaptchaError(true);
       return;
     }
     setStep("age");
-  };
+  }, [captchaToken]);
 
   const handleAgeConfirm = () => {
-    setStoredVerification();
     setStep("done");
   };
 
@@ -62,7 +102,7 @@ export default function VerificationGate({ children }: VerificationGateProps) {
 
   return (
     <>
-      {/* Blurred background — the actual website content */}
+      {/* Blurred background */}
       <div
         className="fixed inset-0 z-40 pointer-events-none select-none"
         style={{ filter: "blur(12px) brightness(0.4)", transform: "scale(1.05)" }}
@@ -98,7 +138,7 @@ export default function VerificationGate({ children }: VerificationGateProps) {
 
           <div className="border border-white/10 bg-black/80 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden">
 
-            {/* ── Step 1: reCAPTCHA ── */}
+            {/* Step 1: reCAPTCHA */}
             {step === "captcha" && (
               <div className="p-8 space-y-6">
                 <div className="text-center space-y-2">
@@ -108,13 +148,11 @@ export default function VerificationGate({ children }: VerificationGateProps) {
                   </p>
                 </div>
 
-                <div className="flex justify-center">
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={RECAPTCHA_SITE_KEY}
-                    onChange={handleCaptchaChange}
-                    theme="dark"
-                  />
+                <div className="flex justify-center min-h-[78px] items-center">
+                  {!captchaReady && (
+                    <div className="text-gray-500 text-sm">Loading verification...</div>
+                  )}
+                  <div id="recaptcha-container" />
                 </div>
 
                 {captchaError && (
@@ -133,7 +171,7 @@ export default function VerificationGate({ children }: VerificationGateProps) {
               </div>
             )}
 
-            {/* ── Step 2: Age Verification ── */}
+            {/* Step 2: Age Verification */}
             {step === "age" && (
               <div className="p-8 space-y-6">
                 <div className="text-center space-y-3">
