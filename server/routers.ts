@@ -3,6 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { adminRouter } from "./routers/admin";
+import { emailAuthRouter } from "./routers/emailAuth";
 import { friendsRouter } from "./routers/friends";
 import { gamesRouter } from "./routers/games";
 import { leaderboardRouter } from "./routers/leaderboard";
@@ -19,6 +20,8 @@ export const appRouter = router({
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
       return { success: true } as const;
     }),
+    register: emailAuthRouter.register,
+    login: emailAuthRouter.login,
   }),
 
   profile: profileRouter,

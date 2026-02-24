@@ -16,6 +16,8 @@ import Contact from "./pages/Contact";
 import Leaderboard from "./pages/Leaderboard";
 
 // Auth pages
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 
 // Dashboard
@@ -55,6 +57,8 @@ function Router() {
       <Route path="/responsible-play" component={ResponsiblePlay} />
 
       {/* Auth & Profile */}
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
       <Route path="/profile" component={Profile} />
 
       {/* Dashboard */}

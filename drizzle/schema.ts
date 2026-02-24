@@ -21,6 +21,7 @@ export const users = mysqlTable("users", {
   username: varchar("username", { length: 50 }).unique(),
   avatarUrl: text("avatarUrl"),
   bio: text("bio"),
+  passwordHash: text("passwordHash"),
   loginMethod: varchar("loginMethod", { length: 64 }),
   role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
   // Stats
