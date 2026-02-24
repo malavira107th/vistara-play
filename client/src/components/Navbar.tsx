@@ -47,11 +47,13 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 shrink-0">
+        <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label="Vistara Play - Go to homepage">
           <img
             src="/assets/logo.webp"
             alt="Vistara Play"
             className="h-9 w-auto object-contain"
+            width="160"
+            height="90"
           />
           <Badge
             variant="outline"
@@ -168,7 +170,7 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72 bg-card">
               <div className="flex items-center gap-2 mb-6 pt-2">
-                <img src="/assets/logo.webp" alt="Vistara Play" className="h-8 w-auto object-contain" />
+                <img src="/assets/logo.webp" alt="Vistara Play" className="h-8 w-auto object-contain" width="142" height="80" />
                 <Badge variant="outline" className="text-[10px] font-bold border-amber-500 text-amber-600 bg-amber-50 px-1.5 py-0 h-5">18+</Badge>
               </div>
               <div className="flex flex-col gap-1">

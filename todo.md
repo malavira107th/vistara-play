@@ -161,3 +161,14 @@
 - [x] Move client/public/icons/ to client/public/assets/icons/
 - [x] Update SvgIcon.tsx src path to /assets/icons/
 - [x] Push to GitHub
+
+## Phase 24: PageSpeed Insights Fixes
+- [x] Add preload link for hero-bg.webp in index.html
+- [x] Add explicit width/height to all logo img tags (Navbar, Footer, VerificationGate)
+- [x] Fix viewport meta: remove maximum-scale=1 (removed entirely for full zoom support)
+- [x] Add aria-label to logo Link in Navbar
+- [x] Create valid robots.txt in client/public/
+- [x] Add security headers (X-Frame-Options, HSTS, COOP, CSP, XFO) to server
+- [x] Add code splitting / lazy loading for routes in App.tsx
+- [x] Fonts are self-hosted with font-display:swap - no Google CDN dependency
+- [x] hero-bg.webp already optimized (134 KiB at 1280px)

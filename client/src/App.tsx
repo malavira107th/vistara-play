@@ -1,55 +1,62 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
+import { lazy, Suspense } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import VerificationGate from "./components/VerificationGate";
 import MobileWelcomeBanner from "./components/MobileWelcomeBanner";
 
-// Public pages
+// Critical above-the-fold page - loaded eagerly
 import Home from "./pages/Home";
-import ResponsiblePlay from "./pages/ResponsiblePlay";
-import HowToPlay from "./pages/HowToPlay";
-import About from "./pages/About";
-import Terms from "./pages/Terms";
-import Privacy from "./pages/Privacy";
-import Contact from "./pages/Contact";
-import Leaderboard from "./pages/Leaderboard";
 
+// All other pages - lazy loaded for code splitting (reduces unused JS on initial load)
+const NotFound = lazy(() => import("@/pages/NotFound"));
+const ResponsiblePlay = lazy(() => import("./pages/ResponsiblePlay"));
+const HowToPlay = lazy(() => import("./pages/HowToPlay"));
+const About = lazy(() => import("./pages/About"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Leaderboard = lazy(() => import("./pages/Leaderboard"));
 // Auth pages
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
-import Profile from "./pages/Profile";
-
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const Profile = lazy(() => import("./pages/Profile"));
 // Dashboard
-import Dashboard from "./pages/Dashboard";
-
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 // Rooms
-import Rooms from "./pages/Rooms";
-import CreateRoom from "./pages/CreateRoom";
-import RoomLobby from "./pages/RoomLobby";
-import JoinRoom from "./pages/JoinRoom";
-
+const Rooms = lazy(() => import("./pages/Rooms"));
+const CreateRoom = lazy(() => import("./pages/CreateRoom"));
+const RoomLobby = lazy(() => import("./pages/RoomLobby"));
+const JoinRoom = lazy(() => import("./pages/JoinRoom"));
 // Games
-import GamePlay from "./pages/GamePlay";
-
+const GamePlay = lazy(() => import("./pages/GamePlay"));
 // Friends
-import Friends from "./pages/Friends";
-
+const Friends = lazy(() => import("./pages/Friends"));
 // Admin
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminUsers from "./pages/admin/AdminUsers";
-import AdminRooms from "./pages/admin/AdminRooms";
-import AdminMatches from "./pages/admin/AdminMatches";
-import AdminPlayers from "./pages/admin/AdminPlayers";
-import AdminQuestions from "./pages/admin/AdminQuestions";
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
+const AdminRooms = lazy(() => import("./pages/admin/AdminRooms"));
+const AdminMatches = lazy(() => import("./pages/admin/AdminMatches"));
+const AdminPlayers = lazy(() => import("./pages/admin/AdminPlayers"));
+const AdminQuestions = lazy(() => import("./pages/admin/AdminQuestions"));
+
+// Simple loading fallback
+function PageLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
 
 function Router() {
   return (
-    <Switch>
+    <Suspense fallback={<PageLoader />}>
+      <Switch>
       {/* Public */}
       <Route path="/" component={Home} />
       <Route path="/how-to-play" component={HowToPlay} />
@@ -93,7 +100,8 @@ function Router() {
 
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
-    </Switch>
+      </Switch>
+    </Suspense>
   );
 }
 

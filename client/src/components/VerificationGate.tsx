@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Shield, CheckCircle2, AlertTriangle } from "lucide-react";
+import { Shield, CheckCircle2, AlertTriangle } from "@/components/SvgIcon";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "6Ldys3UsAAAAAIvO7p8XKO6_eUqOJ9dJVCtTQQYi";
 type Step = "captcha" | "age" | "done";
@@ -120,7 +120,7 @@ export default function VerificationGate({ children }: VerificationGateProps) {
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="flex justify-center mb-6">
-            <img src="/assets/logo.webp" alt="Vistara Play" className="h-14 w-auto" />
+            <img src="/assets/logo.webp" alt="Vistara Play" className="h-14 w-auto" width="256" height="143" />
           </div>
 
           {/* Step indicator */}
