@@ -4,22 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle2, AlertTriangle } from "lucide-react";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "6Ldys3UsAAAAAIvO7p8XKO6_eUqOJ9dJVCtTQQYi";
-const STORAGE_KEY = "vp_verified";
-
 type Step = "captcha" | "age" | "done";
-
-function getStoredVerification(): boolean {
-  try {
-    const val = sessionStorage.getItem(STORAGE_KEY);
-    return val === "true";
-  } catch {
-    return false;
-  }
-}
 
 function setStoredVerification() {
   try {
-    sessionStorage.setItem(STORAGE_KEY, "true");
+    sessionStorage.setItem("vp_verified", "true");
   } catch {}
 }
 
@@ -28,7 +17,8 @@ interface VerificationGateProps {
 }
 
 export default function VerificationGate({ children }: VerificationGateProps) {
-  const [step, setStep] = useState<Step>(() => getStoredVerification() ? "done" : "captcha");
+  // Always start at captcha — gate shows on every page load/refresh
+  const [step, setStep] = useState<Step>("captcha");
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [ageError, setAgeError] = useState(false);
   const [captchaError, setCaptchaError] = useState(false);
