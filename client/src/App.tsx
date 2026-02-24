@@ -4,6 +4,8 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import VerificationGate from "./components/VerificationGate";
+import MobileWelcomeBanner from "./components/MobileWelcomeBanner";
 
 // Public pages
 import Home from "./pages/Home";
@@ -100,8 +102,11 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
-          <Toaster richColors position="top-right" />
-          <Router />
+          <VerificationGate>
+            <Toaster richColors position="top-right" />
+            <Router />
+            <MobileWelcomeBanner />
+          </VerificationGate>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

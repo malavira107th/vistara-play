@@ -23,8 +23,8 @@ export const appRouter = router({
     }),
     register: emailAuthRouter.register,
     login: emailAuthRouter.login,
-    forgotPassword: passwordResetRouter.forgotPassword,
-    resetPassword: passwordResetRouter.resetPassword,
+    checkEmail: passwordResetRouter.checkEmail,
+    resetPasswordByEmail: passwordResetRouter.resetPasswordByEmail,
   }),
 
   profile: profileRouter,
