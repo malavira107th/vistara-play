@@ -137,3 +137,15 @@
 - [x] Create local SvgIcon component
 - [x] Replace all lucide-react imports with local SVG component
 - [x] Push to GitHub
+
+## Phase 20: Vercel Deployment
+- [x] Create vercel.json configuration
+- [x] Install Vercel CLI and deploy
+- [x] Confirm deployment URL
+
+## Phase 21: Branding & External Link Audit
+- [x] Audit all Manus branding references in frontend code
+- [x] Audit all external CDN links (manuscdn.com, manus.im, etc.)
+- [x] Audit all hardcoded URLs and third-party references
+- [x] Fix/replace all found issues
+- [x] Push clean code to GitHub

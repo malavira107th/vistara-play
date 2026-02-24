@@ -49,7 +49,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
           <img
-            src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/vaNrCiFPaQuDrqog.webp"
+            src="/logo.webp"
             alt="Vistara Play"
             className="h-9 w-auto object-contain"
           />
@@ -168,7 +168,7 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72 bg-card">
               <div className="flex items-center gap-2 mb-6 pt-2">
-                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663073602365/vaNrCiFPaQuDrqog.webp" alt="Vistara Play" className="h-8 w-auto object-contain" />
+                <img src="/logo.webp" alt="Vistara Play" className="h-8 w-auto object-contain" />
                 <Badge variant="outline" className="text-[10px] font-bold border-amber-500 text-amber-600 bg-amber-50 px-1.5 py-0 h-5">18+</Badge>
               </div>
               <div className="flex flex-col gap-1">
