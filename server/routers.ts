@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { adminRouter } from "./routers/admin";
 import { emailAuthRouter } from "./routers/emailAuth";
+import { passwordResetRouter } from "./routers/passwordReset";
 import { friendsRouter } from "./routers/friends";
 import { gamesRouter } from "./routers/games";
 import { leaderboardRouter } from "./routers/leaderboard";
@@ -22,6 +23,8 @@ export const appRouter = router({
     }),
     register: emailAuthRouter.register,
     login: emailAuthRouter.login,
+    forgotPassword: passwordResetRouter.forgotPassword,
+    resetPassword: passwordResetRouter.resetPassword,
   }),
 
   profile: profileRouter,

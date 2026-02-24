@@ -22,6 +22,7 @@ import {
   roomParticipants,
   rooms,
   users,
+  passwordResetTokens,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
 
@@ -609,4 +610,38 @@ export async function getPlatformStats() {
     games: gameCount[0]?.count ?? 0,
     activeRooms: activeRoomCount[0]?.count ?? 0,
   };
+}
+
+// ─── Password Reset Token Helpers ─────────────────────────────────────────────
+
+export async function createPasswordResetToken(userId: number, token: string, expiresAt: Date) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(passwordResetTokens).values({ userId, token, expiresAt });
+}
+
+export async function getPasswordResetToken(token: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db
+    .select()
+    .from(passwordResetTokens)
+    .where(eq(passwordResetTokens.token, token))
+    .limit(1);
+  return result[0];
+}
+
+export async function markPasswordResetTokenUsed(token: string) {
+  const db = await getDb();
+  if (!db) return;
+  await db
+    .update(passwordResetTokens)
+    .set({ usedAt: new Date() })
+    .where(eq(passwordResetTokens.token, token));
+}
+
+export async function updateUserPassword(userId: number, passwordHash: string) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(users).set({ passwordHash, updatedAt: new Date() }).where(eq(users.id, userId));
 }
