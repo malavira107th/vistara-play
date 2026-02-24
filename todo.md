@@ -144,8 +144,8 @@
 - [x] Confirm deployment URL
 
 ## Phase 21: Branding & External Link Audit
-- [x] Audit all Manus branding references in frontend code
-- [x] Audit all external CDN links (manuscdn.com, manus.im, etc.)
+- [x] Audit all external branding references in frontend code
+- [x] Audit all external CDN links
 - [x] Audit all hardcoded URLs and third-party references
 - [x] Fix/replace all found issues
 - [x] Push clean code to GitHub
