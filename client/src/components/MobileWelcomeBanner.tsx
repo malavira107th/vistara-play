@@ -18,9 +18,6 @@ export default function MobileWelcomeBanner() {
 
     if (isMobile && isVerified) {
       setVisible(true);
-      // Auto-dismiss after 4 seconds
-      const timer = setTimeout(() => setVisible(false), 4000);
-      return () => clearTimeout(timer);
     }
   }, []);
 
