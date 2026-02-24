@@ -92,6 +92,7 @@ export default function VerificationGate({ children }: VerificationGateProps) {
   }, [captchaToken]);
 
   const handleAgeConfirm = () => {
+    sessionStorage.setItem("vp_verified", "true");
     setStep("done");
   };
 
