@@ -19,7 +19,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-3">
-              <img src="/logo.webp" alt="Vistara Play" className="h-8 w-auto object-contain" />
+              <img src="/assets/logo.webp" alt="Vistara Play" className="h-8 w-auto object-contain" />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               A free skill-based cricket gaming platform for entertainment. Host rooms, play with friends, and test your cricket knowledge.

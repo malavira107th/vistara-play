@@ -156,3 +156,8 @@
 - [x] Replace all lucide-react imports in ui/ files
 - [x] Verify 0 lucide-react imports remain
 - [x] Push to GitHub
+
+## Phase 23: Move Icons to assets/icons/
+- [x] Move client/public/icons/ to client/public/assets/icons/
+- [x] Update SvgIcon.tsx src path to /assets/icons/
+- [x] Push to GitHub

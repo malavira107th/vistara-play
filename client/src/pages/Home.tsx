@@ -123,7 +123,7 @@ export default function Home() {
       <section
         className="relative overflow-hidden"
         style={{
-          backgroundImage: `url('/hero-bg.webp')`,
+          backgroundImage: `url('/assets/hero-bg.webp')`,
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}

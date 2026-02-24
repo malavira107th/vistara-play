@@ -27,7 +27,7 @@ const SvgIcon = React.forwardRef<HTMLImageElement, SvgIconProps>(
     return (
       <img
         ref={ref}
-        src={`/icons/${name}.svg`}
+        src={`/assets/icons/${name}.svg`}
         alt={alt ?? name}
         aria-hidden={alt === "" ? true : undefined}
         width={isNumeric ? size : undefined}
