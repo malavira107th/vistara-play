@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const BANNER_IMAGE = "/assets/mobile-welcome-banner.webp";
+const WHATSAPP_LINK = "https://chat.whatsapp.com/CdT1dshldmkAGKweVRz5kS?mode=gi_t";
 
 /**
  * Full-screen sticky mobile welcome banner.
@@ -8,7 +9,8 @@ const BANNER_IMAGE = "/assets/mobile-welcome-banner.webp";
  * 1. User passed both verification steps (sessionStorage "vp_verified" = "true")
  * 2. Screen width ≤ 768px (mobile)
  *
- * No close button. Stays full screen until user taps "Enter Site".
+ * Tapping the banner opens the WhatsApp group link in a new tab.
+ * "Skip" button at bottom dismisses the banner.
  */
 export default function MobileWelcomeBanner() {
   const [visible, setVisible] = useState(false);
@@ -25,18 +27,26 @@ export default function MobileWelcomeBanner() {
 
   return (
     <div className="fixed inset-0 z-[9999] bg-black flex flex-col">
-      {/* Full-screen banner image */}
-      <img
-        src={BANNER_IMAGE}
-        alt="Welcome to Vistara Play"
-        className="w-full h-full object-cover"
-      />
-      {/* Tap to enter overlay at bottom */}
+      {/* Full-screen banner — tap to open WhatsApp */}
+      <a
+        href={WHATSAPP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex-1 block"
+      >
+        <img
+          src={BANNER_IMAGE}
+          alt="Welcome to Vistara Play"
+          className="w-full h-full object-cover"
+        />
+      </a>
+
+      {/* Skip button at bottom */}
       <button
         onClick={() => setVisible(false)}
-        className="absolute bottom-0 left-0 right-0 py-5 bg-black/60 text-white text-center text-lg font-bold tracking-wide backdrop-blur-sm"
+        className="w-full py-4 bg-black text-gray-400 text-sm font-medium tracking-wide text-center"
       >
-        Tap to Enter →
+        Skip →
       </button>
     </div>
   );
