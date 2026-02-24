@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { trpc } from "@/lib/trpc";
-import { Loader2, Users, Shield } from "lucide-react";
+import { Loader2, Users, Shield } from "@/components/SvgIcon";
 
 export default function AdminUsers() {
   const { user, isAuthenticated, loading } = useAuth();

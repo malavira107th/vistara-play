@@ -9,7 +9,7 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { Button } from "@/components/ui/button";
-import { Trophy, Medal, Star, Users, Globe, Loader2 } from "lucide-react";
+import { Trophy, Medal, Star, Users, Globe, Loader2 } from "@/components/SvgIcon";
 import { Link } from "wouter";
 
 function RankBadge({ rank }: { rank: number }) {

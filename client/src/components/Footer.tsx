@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Mail } from "lucide-react";
+import { Mail } from "@/components/SvgIcon";
 
 export default function Footer() {
   return (

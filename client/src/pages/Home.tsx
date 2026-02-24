@@ -19,7 +19,7 @@ import {
   Brain,
   BarChart3,
   CheckCircle2,
-} from "lucide-react";
+} from "@/components/SvgIcon";
 
 const gameModes = [
   {

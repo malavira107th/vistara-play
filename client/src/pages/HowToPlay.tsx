@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Users, Target, Zap, DoorOpen, Trophy, UserPlus, BarChart3 } from "lucide-react";
+import { Brain, Users, Target, Zap, DoorOpen, Trophy, UserPlus, BarChart3 } from "@/components/SvgIcon";
 
 const gameModeDetails = [
   {

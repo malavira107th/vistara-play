@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Loader2, DoorOpen, Shield, Users, Eye } from "lucide-react";
+import { Loader2, DoorOpen, Shield, Users, Eye } from "@/components/SvgIcon";
 
 const statusColors: Record<string, string> = {
   waiting: "bg-gray-100 text-gray-600",

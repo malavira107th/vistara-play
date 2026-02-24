@@ -13,7 +13,7 @@ import { useLocation, useParams } from "wouter";
 import {
   Loader2, DoorOpen, Users, Copy, Play, LogOut, Crown,
   Brain, Target, Zap, Trophy
-} from "lucide-react";
+} from "@/components/SvgIcon";
 import { Link } from "wouter";
 
 const modeIcons: Record<string, any> = { quiz: Brain, team_selection: Users, strategy: Target, scenario: Zap };

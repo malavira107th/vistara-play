@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Shield, Trophy, Zap } from "lucide-react";
+import { Users, Shield, Trophy, Zap } from "@/components/SvgIcon";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Link } from "wouter";
-import { DoorOpen, PlusCircle, Search, Users, Clock, Loader2, Lock, Globe } from "lucide-react";
+import { DoorOpen, PlusCircle, Search, Users, Clock, Loader2, Lock, Globe } from "@/components/SvgIcon";
 import { formatDistanceToNow } from "date-fns";
 
 const modeLabels: Record<string, string> = {

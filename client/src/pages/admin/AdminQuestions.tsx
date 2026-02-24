@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Loader2, Database, Shield, PlusCircle, Trash2 } from "lucide-react";
+import { Loader2, Database, Shield, PlusCircle, Trash2 } from "@/components/SvgIcon";
 
 export default function AdminQuestions() {
   const { user, isAuthenticated, loading } = useAuth();

@@ -12,7 +12,7 @@ import { Link } from "wouter";
 import {
   Gamepad2, Trophy, Star, LayoutDashboard, PlusCircle, DoorOpen,
   Clock, Loader2, Users, ChevronRight, User
-} from "lucide-react";
+} from "@/components/SvgIcon";
 import { formatDistanceToNow } from "date-fns";
 
 function StatCard({ icon: Icon, label, value, color }: { icon: any; label: string; value: string | number; color: string }) {

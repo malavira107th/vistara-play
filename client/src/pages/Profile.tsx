@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Loader2, User, Trophy, Gamepad2, Star } from "lucide-react";
+import { Loader2, User, Trophy, Gamepad2, Star } from "@/components/SvgIcon";
 
 export default function Profile() {
   const { user, isAuthenticated, loading } = useAuth();

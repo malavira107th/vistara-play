@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useLocation, useParams } from "wouter";
-import { Loader2, DoorOpen, Users, Search } from "lucide-react";
+import { Loader2, DoorOpen, Users, Search } from "@/components/SvgIcon";
 
 const modeLabels: Record<string, string> = {
   quiz: "Quiz",

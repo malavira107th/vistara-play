@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useLocation, useParams, Link } from "wouter";
-import { Loader2, Brain, Users, Target, Zap, Trophy, CheckCircle, XCircle, Clock } from "lucide-react";
+import { Loader2, Brain, Users, Target, Zap, Trophy, CheckCircle, XCircle, Clock } from "@/components/SvgIcon";
 
 // ─── Quiz Game Mode ────────────────────────────────────────────────────────────
 const quizQuestions = [

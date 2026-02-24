@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
-import { Loader2, PlusCircle, Brain, Users, Target, Zap, Globe, Lock } from "lucide-react";
+import { Loader2, PlusCircle, Brain, Users, Target, Zap, Globe, Lock } from "@/components/SvgIcon";
 
 const gameModes = [
   { value: "quiz", label: "Cricket Knowledge Quiz", icon: Brain, desc: "Answer cricket questions. Scored on knowledge.", color: "border-blue-200 bg-blue-50" },

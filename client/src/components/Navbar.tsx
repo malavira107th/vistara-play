@@ -23,7 +23,7 @@ import {
   Shield,
   PlusCircle,
   DoorOpen,
-} from "lucide-react";
+} from "@/components/SvgIcon";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
 

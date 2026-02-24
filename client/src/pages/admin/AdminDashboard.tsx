@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
-import { Loader2, Users, DoorOpen, Trophy, Settings, Database, Activity, Shield, ChevronRight } from "lucide-react";
+import { Loader2, Users, DoorOpen, Trophy, Settings, Database, Activity, Shield, ChevronRight } from "@/components/SvgIcon";
 
 function StatCard({ icon: Icon, label, value, color, href }: { icon: any; label: string; value: string | number; color: string; href?: string }) {
   const content = (

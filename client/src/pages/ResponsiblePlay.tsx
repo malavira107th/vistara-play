@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Shield, Clock, Users, AlertCircle, Heart, Info } from "lucide-react";
+import { Shield, Clock, Users, AlertCircle, Heart, Info } from "@/components/SvgIcon";
 
 const sections = [
   {

@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Loader2, Users, UserPlus, Search, Check, X, Trophy, Gamepad2 } from "lucide-react";
+import { Loader2, Users, UserPlus, Search, Check, X, Trophy, Gamepad2 } from "@/components/SvgIcon";
 
 function UserCard({ user, onAdd, onAccept, onDecline, onRemove, type }: {
   user: any;
