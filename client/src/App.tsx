@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import VerificationGate from "./components/VerificationGate";
@@ -97,16 +97,34 @@ function Router() {
   );
 }
 
+function AppContent() {
+  const [location] = useLocation();
+  const isHomePage = location === "/";
+
+  return (
+    <>
+      <Toaster richColors position="top-right" />
+      {isHomePage ? (
+        <VerificationGate>
+          <Router />
+          <MobileWelcomeBanner />
+        </VerificationGate>
+      ) : (
+        <>
+          <Router />
+          <MobileWelcomeBanner />
+        </>
+      )}
+    </>
+  );
+}
+
 function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
-          <VerificationGate>
-            <Toaster richColors position="top-right" />
-            <Router />
-            <MobileWelcomeBanner />
-          </VerificationGate>
+          <AppContent />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
