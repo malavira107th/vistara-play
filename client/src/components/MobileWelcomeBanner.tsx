@@ -5,10 +5,7 @@ const WHATSAPP_LINK = "https://wa.link/99exch1";
 
 /**
  * Full-screen sticky mobile welcome banner.
- * Shows on EVERY visit when:
- * - Screen width ≤ 768px (mobile device)
- * - Both verification steps have been passed (vp_verified = "true" in sessionStorage)
- *
+ * Shows on every visit on mobile (screen width ≤ 768px) after a 10-second delay.
  * Tapping the banner opens WhatsApp group.
  * Skip button at bottom dismisses the banner.
  */
@@ -16,35 +13,12 @@ export default function MobileWelcomeBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const checkAndShow = () => {
-      const isMobile = window.innerWidth <= 768;
-      const isVerified = sessionStorage.getItem("vp_verified") === "true";
-      if (isMobile && isVerified) {
-        setVisible(true);
-      }
-    };
-
-    // Check immediately
-    checkAndShow();
-
-    // Also listen for storage changes (in case verification completes after mount)
-    const onStorage = () => checkAndShow();
-    window.addEventListener("storage", onStorage);
-
-    // Poll briefly to catch sessionStorage set in same tab (storage event doesn't fire for same tab)
-    const interval = setInterval(() => {
-      if (!visible) checkAndShow();
-    }, 200);
-
-    // Stop polling after 10 seconds
-    const timeout = setTimeout(() => clearInterval(interval), 10000);
-
-    return () => {
-      window.removeEventListener("storage", onStorage);
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [visible]);
+    const isMobile = window.innerWidth <= 768;
+    if (!isMobile) return;
+    // Show banner after 10 seconds
+    const timer = setTimeout(() => setVisible(true), 10000);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!visible) return null;
 
@@ -57,6 +31,7 @@ export default function MobileWelcomeBanner() {
         rel="noopener noreferrer"
         className="flex-1 block"
         style={{ display: "flex" }}
+        aria-label="Join Vistara Play on WhatsApp"
       >
         <img
           src={BANNER_IMAGE}

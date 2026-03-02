@@ -1,10 +1,9 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazy, Suspense } from "react";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import VerificationGate from "./components/VerificationGate";
 import MobileWelcomeBanner from "./components/MobileWelcomeBanner";
 
 // Critical above-the-fold page - loaded eagerly
@@ -106,23 +105,11 @@ function Router() {
 }
 
 function AppContent() {
-  const [location] = useLocation();
-  const isHomePage = location === "/";
-
   return (
     <>
       <Toaster richColors position="top-right" />
-      {isHomePage ? (
-        <VerificationGate>
-          <Router />
-          <MobileWelcomeBanner />
-        </VerificationGate>
-      ) : (
-        <>
-          <Router />
-          <MobileWelcomeBanner />
-        </>
-      )}
+      <Router />
+      <MobileWelcomeBanner />
     </>
   );
 }
